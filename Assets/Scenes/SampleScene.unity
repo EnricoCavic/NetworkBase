@@ -431,6 +431,9 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
+  atributePaths:
+  - ScriptableObjects/Player 1
+  - ScriptableObjects/Player 2
 --- !u!4 &673336795
 Transform:
   m_ObjectHideFlags: 0

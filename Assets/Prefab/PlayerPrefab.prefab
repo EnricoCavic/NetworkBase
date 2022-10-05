@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6903469137241486998}
   - component: {fileID: -1160581624470384638}
+  - component: {fileID: 5726707327092740021}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -147,3 +148,18 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 2d828ff31462f204381104c93a8ee8a7
   hasSpawned: 0
+--- !u!114 &5726707327092740021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241980832200200197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3359e2b032e54844d867a1d5f0368439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 2
+  displayName: Error name

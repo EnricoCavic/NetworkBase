@@ -5,6 +5,8 @@ using Mirror;
 
 public class CustomNetworkManager : NetworkManager
 {
+    [Header("Custom")]
+    [SerializeField] private List<string> atributePaths;
 
     public override void OnClientConnect()
     {
@@ -16,8 +18,19 @@ public class CustomNetworkManager : NetworkManager
     {
         base.OnServerAddPlayer(conn);
         Debug.Log("Reação do server a entrada de players");
-        Debug.Log("Player joined" + conn.identity.netId);
         Debug.Log("Total players" + numPlayers);
+        PlayerSetup(conn);
+
+
+    }
+
+    private void PlayerSetup(NetworkConnectionToClient conn)
+    {
+        var netPlayer = conn.identity.GetComponent<NetworkCharacterManager>();
+        var currentAttribute = atributePaths[numPlayers - 1];
+        netPlayer.SetupCharacter(currentAttribute);
+
+        Debug.Log("Player joined " + currentAttribute);
 
     }
 }
