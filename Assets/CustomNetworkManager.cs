@@ -133,7 +133,10 @@ public class CustomNetworkManager : NetworkManager
     /// <param name="conn">Connection from client.</param>
     public override void OnServerConnect(NetworkConnectionToClient conn)
     {
-        Debug.Log($"Player {conn.identity.netId} connected || {numPlayers} online");
+        base.OnServerAddPlayer(conn);
+
+        Debug.Log($"Player {numPlayers} online");
+        Debug.Log("Player added");
     }
 
     /// <summary>
