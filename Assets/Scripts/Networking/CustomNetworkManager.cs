@@ -20,15 +20,13 @@ public class CustomNetworkManager : NetworkManager
         Debug.Log("Reação do server a entrada de players", this);
         PlayerSetup(conn);
         Debug.Log("Total players" + numPlayers, this);
-
-
     }
 
     private void PlayerSetup(NetworkConnectionToClient conn)
     {
         var netPlayer = conn.identity.GetComponent<NetworkCharacterManager>();
         var currentAttribute = atributePaths[numPlayers - 1];
-        netPlayer.SetAttributePath(currentAttribute);
+        netPlayer.Initialize(currentAttribute);
 
         Debug.Log("Player joined " + currentAttribute, this);
 
