@@ -7,18 +7,19 @@ public class NetworkCharacterManager : NetworkBehaviour
 {
     [SerializeField] private CharacterAtributes atributes;
 
-    [SyncVar]
-    [SerializeField] private string atributePath;
+    [SyncVar(hook = nameof(SyncAttributePath))]
+    [SerializeField] private string attributePath;
 
-    public void SyncDisplayName(string oldPath, string newPath)
+    public void SyncAttributePath(string _oldPath, string _newPath)
     {
-        if (newPath.Equals(oldPath)) return;
-        atributes = Resources.Load<CharacterAtributes>(atributePath);
+        Debug.Log($"SyncVar old path : {_oldPath} || new path : {_newPath}", this);
+        atributes = Resources.Load<CharacterAtributes>(attributePath);
     }
 
-    public void SetupCharacter(string _newName)
+    [Server]
+    public void SetAttributePath(string _newPath)
     {
-        atributePath = _newName;
-        atributes = Resources.Load<CharacterAtributes>(atributePath);
+        Debug.Log($"ServerSet new path : {_newPath}", this);
+        attributePath = _newPath;
     }
 }

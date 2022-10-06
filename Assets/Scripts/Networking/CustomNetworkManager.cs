@@ -11,15 +11,15 @@ public class CustomNetworkManager : NetworkManager
     public override void OnClientConnect()
     {
         base.OnClientConnect();
-        Debug.Log("Init generalizada em players locais");
+        Debug.Log("Init generalizada em players locais", this);
     }
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
         base.OnServerAddPlayer(conn);
-        Debug.Log("Reação do server a entrada de players");
-        Debug.Log("Total players" + numPlayers);
+        Debug.Log("Reação do server a entrada de players", this);
         PlayerSetup(conn);
+        Debug.Log("Total players" + numPlayers, this);
 
 
     }
@@ -28,9 +28,9 @@ public class CustomNetworkManager : NetworkManager
     {
         var netPlayer = conn.identity.GetComponent<NetworkCharacterManager>();
         var currentAttribute = atributePaths[numPlayers - 1];
-        netPlayer.SetupCharacter(currentAttribute);
+        netPlayer.SetAttributePath(currentAttribute);
 
-        Debug.Log("Player joined " + currentAttribute);
+        Debug.Log("Player joined " + currentAttribute, this);
 
     }
 }
