@@ -31,4 +31,5 @@ public class CustomNetworkManager : NetworkManager
         Debug.Log("Player joined " + currentAttribute, this);
 
     }
+
 }

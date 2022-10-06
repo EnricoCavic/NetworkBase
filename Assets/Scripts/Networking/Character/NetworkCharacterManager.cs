@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Cavic.Networking.Character;
+using System;
 
 public class NetworkCharacterManager : NetworkBehaviour
 {
     [SerializeField] private CharacterAtributes atributes;
 
     [SerializeField] private CharacterUI characterUI;
+    [SerializeField] private CombatMode combatMode;
 
     [SyncVar(hook = nameof(SyncAttributePath))]
     [SerializeField] private string attributePath;
@@ -31,5 +33,10 @@ public class NetworkCharacterManager : NetworkBehaviour
         Debug.Log($"ServerInitialize new path : {_newPath}", this);
         attributePath = _newPath;
         characterUI.CacheComponents();
+        combatMode.CacheComponents();
     }
+
+    [ContextMenu("StartCombat")]
+    public void CombatMode() => combatMode.CmdCombatMode(atributes);
+
 }

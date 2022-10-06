@@ -21,5 +21,12 @@ namespace Cavic.Networking.Character
             CacheComponents();
             infoUi.SetElementText($"{_atributes.charClass} {_atributes.displayName}");
         }
+
+        public void CombatDisplay(CharacterAtributes _atributes)
+        {
+            CacheComponents();
+            infoUi.SetElementText($"Dmg: {_atributes.damage}\nSpd: {_atributes.speed}");
+
+        }
     }
 }
