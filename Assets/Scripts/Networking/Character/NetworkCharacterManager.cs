@@ -3,40 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Cavic.Networking.Character;
+using Cavic.Gameplay;
 using System;
 
-public class NetworkCharacterManager : NetworkBehaviour
+namespace Cavic.Networking
 {
-    [SerializeField] private CharacterAtributes atributes;
-
-    [SerializeField] private CharacterUI characterUI;
-    [SerializeField] private CombatMode combatMode;
-
-    [SyncVar(hook = nameof(SyncAttributePath))]
-    [SerializeField] private string attributePath;
-    public void SyncAttributePath(string _oldPath, string _newPath)
+    public class NetworkCharacterManager : NetworkBehaviour
     {
-        Debug.Log($"SyncVar old path : {_oldPath} || new path : {_newPath}", this);
-        atributes = Resources.Load<CharacterAtributes>(attributePath);
-        StartCoroutine(WaitForAttributes());
+        [SyncVar(hook = nameof(SyncScharAtributes))]
+        [SerializeField] private CharacterAtributes charAtributes;
+        public void SyncScharAtributes(CharacterAtributes _oldAtributes, CharacterAtributes _newAtributes)
+        {
+            if (_oldAtributes == _newAtributes) return;
+            characterUI.NameDisplay(charAtributes);
+            battler.Initialize(charAtributes);
+        }
+
+        [SerializeField] private CharacterUI characterUI;
+        [SerializeField] private NetworkBattler battler;
+        
+        [Server]
+        public void Initialize(CharacterAtributes _atributes)
+        {
+            charAtributes = _atributes;
+            characterUI.CacheComponents();
+        }
+
+        [Server]
+        public void SetBattlerTartget(NetworkCharacterManager _characterManager)
+        {
+            battler.SetTarget(_characterManager.GetComponent<NetworkBattler>());
+        }
+
+
+        public override void OnStopClient()
+        {
+            base.OnStopClient();
+            characterUI.DestroyDisplay();
+        }
+
     }
-
-    public IEnumerator WaitForAttributes()
-    {
-        yield return new WaitUntil(() => atributes != null);
-        characterUI.NameDisplay(atributes);
-    }
-
-    [Server]
-    public void Initialize(string _newPath)
-    {
-        Debug.Log($"ServerInitialize new path : {_newPath}", this);
-        attributePath = _newPath;
-        characterUI.CacheComponents();
-        combatMode.CacheComponents();
-    }
-
-    [ContextMenu("StartCombat")]
-    public void CombatMode() => combatMode.CmdCombatMode(atributes);
-
 }

@@ -6,18 +6,17 @@ using TMPro;
 
 public class NetworkWorldSpaceUI : MonoBehaviour
 {
-    public NetworkIdentity identity;
-
     private Transform worldSpaceCanvas;
     private TextMeshProUGUI uiElement;
 
     public void Initialize()
     {
         if (uiElement != null) return;
-        uiElement = GetComponent<TextMeshProUGUI>();
+        uiElement = GetComponentInChildren<TextMeshProUGUI>();
 
         worldSpaceCanvas = GameObject.FindGameObjectWithTag("WorldSpaceCanvas").transform;
         transform.SetParent(worldSpaceCanvas);
+        transform.LookAt(Camera.main.transform.position);
     }
 
     public void SetElementText(string _newText) => uiElement.text = _newText;

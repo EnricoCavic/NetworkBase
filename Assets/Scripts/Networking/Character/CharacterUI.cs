@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
+using Cavic.Gameplay;
 
 namespace Cavic.Networking.Character
 {
@@ -16,17 +17,22 @@ namespace Cavic.Networking.Character
             infoUi.Initialize();
         }
 
-        public void NameDisplay(CharacterAtributes _atributes)
+        public void NameDisplay(CharacterAtributes _char)
         {
             CacheComponents();
-            infoUi.SetElementText($"{_atributes.charClass} {_atributes.displayName}");
+            infoUi.SetElementText($"{_char.charClass} {_char.displayName}");
         }
 
-        public void CombatDisplay(CharacterAtributes _atributes)
+        public void CombatDisplay(CharacterAtributes _char)
         {
             CacheComponents();
-            infoUi.SetElementText($"Dmg: {_atributes.damage}\nSpd: {_atributes.speed}");
+            infoUi.SetElementText($"Dmg: {_char.atributes.damage}\nSpd: {_char.atributes.speed}");
+        }
 
+        public void DestroyDisplay()
+        {
+            CacheComponents();
+            Destroy(infoUi.gameObject);
         }
     }
 }

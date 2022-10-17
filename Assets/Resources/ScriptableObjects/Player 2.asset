@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Player 2
   m_EditorClassIdentifier: 
   displayName: Lef
-  damage: 3
-  speed: 110
-  charClass: 2
+  atributes:
+    hp: 577
+    damage: 10
+    speed: 60
+  charClass: 0
