@@ -16,5 +16,5 @@ MonoBehaviour:
   atributes:
     hp: 577
     damage: 10
-    speed: 60
+    speed: 8
   charClass: 0

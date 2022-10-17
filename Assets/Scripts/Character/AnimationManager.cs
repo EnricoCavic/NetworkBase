@@ -13,9 +13,10 @@ public class AnimationManager : MonoBehaviour
 
     public bool IsAttacking { get; private set; }
 
-    public void StartAttack(int _atkId)
+    public void StartAttack(int _atkId, int _currentSpeed)
     {
         animator.SetBool("Attack" + _atkId, true);
+        animator.speed = 0.2f * _currentSpeed;
     }
 
     public void StopAttack(int _atkId)
@@ -31,6 +32,7 @@ public class AnimationManager : MonoBehaviour
     public void AttackHitFrame() => onHitFrame?.Invoke();
     public void AttackFinished()
     {
+        animator.speed = 1;
         IsAttacking = false;
         onAttackFinished?.Invoke();
     }

@@ -50,7 +50,10 @@ namespace Cavic.Networking.Character
         private void Update()
         {
             if (target == null) return;
-            if (CanAttack()) animationManager.StartAttack(1);
+            if (CanAttack())
+            {
+                animationManager.StartAttack(1, currentSpeed);
+            }
             else animationManager.StopAttack(1);
         }
 
@@ -59,7 +62,7 @@ namespace Cavic.Networking.Character
         private bool CanAttack()
         {
             if (target == null || animationManager.IsAttacking) return false;
-            float attackInterval = 100 / currentSpeed;
+            float attackInterval = 10 / currentSpeed;
             return Time.time > attackInterval + lastAttackFrame;
         }
 
