@@ -2010,8 +2010,8 @@ GameObject:
   - component: {fileID: 7792440617110921257}
   - component: {fileID: 3231802680692367653}
   - component: {fileID: 6981854804365880105}
-  - component: {fileID: 1884100316285057412}
   - component: {fileID: 8732164027664609379}
+  - component: {fileID: 1884100316285057412}
   - component: {fileID: 876848304896998850}
   m_Layer: 0
   m_Name: PlayerPrefab
@@ -2104,18 +2104,6 @@ MonoBehaviour:
   showGizmos: 0
   showOverlay: 0
   overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
---- !u!114 &1884100316285057412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6241980832200200197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee65f3550e817a349b3fee857fa7f320, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8732164027664609379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2130,9 +2118,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  charAtributes: {fileID: 0}
   characterUI: {fileID: 1884100316285057412}
   battler: {fileID: 876848304896998850}
+  charAtributes: {fileID: 0}
+--- !u!114 &1884100316285057412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6241980832200200197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee65f3550e817a349b3fee857fa7f320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &876848304896998850
 MonoBehaviour:
   m_ObjectHideFlags: 0

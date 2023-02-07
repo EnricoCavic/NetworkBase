@@ -13,13 +13,13 @@ public class AnimationManager : MonoBehaviour
 
     public bool IsAttacking { get; private set; }
 
-    public void StartAttack(int _atkId, int _currentSpeed)
+    public void StartAttackTrigger(int _atkId, int _currentSpeed)
     {
         animator.SetBool("Attack" + _atkId, true);
         animator.speed = 0.2f * _currentSpeed;
     }
 
-    public void StopAttack(int _atkId)
+    public void StopAttackTrigger(int _atkId)
     {
         animator.SetBool("Attack" + _atkId, false);
     }

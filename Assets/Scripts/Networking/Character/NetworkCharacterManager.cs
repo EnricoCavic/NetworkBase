@@ -10,6 +10,9 @@ namespace Cavic.Networking
 {
     public class NetworkCharacterManager : NetworkBehaviour
     {
+        [SerializeField] private CharacterUI characterUI;
+        [SerializeField] private NetworkBattler battler;
+
         [SyncVar(hook = nameof(SyncScharAtributes))]
         [SerializeField] private CharacterAtributes charAtributes;
         public void SyncScharAtributes(CharacterAtributes _oldAtributes, CharacterAtributes _newAtributes)
@@ -18,9 +21,6 @@ namespace Cavic.Networking
             characterUI.NameDisplay(charAtributes);
             battler.Initialize(charAtributes);
         }
-
-        [SerializeField] private CharacterUI characterUI;
-        [SerializeField] private NetworkBattler battler;
         
         [Server]
         public void Initialize(CharacterAtributes _atributes)

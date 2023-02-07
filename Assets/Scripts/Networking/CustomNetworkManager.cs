@@ -28,21 +28,23 @@ namespace Cavic.Networking
             Debug.Log("Total players" + numPlayers, this);
         }
 
+        [Server]
         private void PlayerSetup(NetworkConnectionToClient conn)
         {
-            var netPlayer = conn.identity.GetComponent<NetworkCharacterManager>();
+            var characterManager = conn.identity.GetComponent<NetworkCharacterManager>();
             var playerAttribute = atributes[numPlayers - 1];
 
-            players.Add(netPlayer);
-            netPlayer.Initialize(playerAttribute);
+            players.Add(characterManager);
+            characterManager.Initialize(playerAttribute);
 
-            if(players.Count == 2)
+            bool isRoomFull = players.Count == 2;
+            if (isRoomFull)
             {
                 players[0].SetBattlerTartget(players[1]);
                 players[1].SetBattlerTartget(players[0]);
             }
 
-            Debug.Log("Player joined " + playerAttribute.displayName , netPlayer);
+            Debug.Log("Player joined " + playerAttribute.displayName , characterManager);
 
         }
 
