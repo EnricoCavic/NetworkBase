@@ -14,10 +14,26 @@ namespace Cavic.Networking
 
         [SerializeField] private List<NetworkCharacterManager> players;
 
+        [SerializeField] private List<Transform> nextPositions;
+
+        public override void OnStartClient()
+        {
+            base.OnStartClient();
+            Application.targetFrameRate = 30;
+            Debug.Log("OnStartClient", this);
+        }
+
         public override void OnClientConnect()
         {
             base.OnClientConnect();
-            Debug.Log("Init generalizada em players locais", this);
+            Debug.Log("OnClientConnect", this);
+        }
+
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            Application.targetFrameRate = 30;
+            Debug.Log("OnStartServer", this);
         }
 
         public override void OnServerAddPlayer(NetworkConnectionToClient conn)
@@ -37,14 +53,18 @@ namespace Cavic.Networking
             players.Add(characterManager);
             characterManager.Initialize(playerAttribute);
 
-            bool isRoomFull = players.Count == 2;
-            if (isRoomFull)
-            {
-                players[0].SetBattlerTartget(players[1]);
-                players[1].SetBattlerTartget(players[0]);
-            }
+            characterManager.MoveTo(nextPositions[0]);
 
-            Debug.Log("Player joined " + playerAttribute.displayName , characterManager);
+            //Debug.Log("Player joined " + playerAttribute.displayName , characterManager);
+
+            //bool isRoomFull = players.Count == 2;
+            //if (isRoomFull)
+            //{
+            //    players[0].SetBattlerTartget(players[1]);
+            //    players[1].SetBattlerTartget(players[0]);
+            //}
+
+            //Debug.Log("Room is full");
 
         }
 

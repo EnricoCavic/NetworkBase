@@ -12,6 +12,9 @@ namespace Cavic.Networking
     {
         [SerializeField] private CharacterUI characterUI;
         [SerializeField] private NetworkBattler battler;
+        [SerializeField] private CharacterMovement characterMovement;
+
+        [SerializeField] Transform testPosition;
 
         [SyncVar(hook = nameof(SyncScharAtributes))]
         [SerializeField] private CharacterAtributes charAtributes;
@@ -29,10 +32,14 @@ namespace Cavic.Networking
             characterUI.CacheComponents();
         }
 
-        [Server]
         public void SetBattlerTartget(NetworkCharacterManager _characterManager)
         {
             battler.SetTarget(_characterManager.GetComponent<NetworkBattler>());
+        }
+
+        public void MoveTo(Transform transform)
+        {
+            characterMovement.SetDestination(transform.position);
         }
 
 

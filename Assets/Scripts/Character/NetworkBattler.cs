@@ -25,6 +25,7 @@ namespace Cavic.Networking.Character
 
         private NetworkBattler target;
         public event Action ServerOnDied;
+        private bool isBattling = false;
 
         public override void OnStartServer()
         {
@@ -49,7 +50,7 @@ namespace Cavic.Networking.Character
         [ServerCallback]
         private void Update()
         {
-            if (target == null) return;
+            if (target == null || !isBattling) return;
 
             if (CanAttack())
                 animationManager.StartAttackTrigger(1, currentSpeed);
@@ -78,11 +79,11 @@ namespace Cavic.Networking.Character
         [Server] 
         public void OnHitFrame()
         {
-            target.SetHP(-currentDamage);
+            target.ModifyHP(-currentDamage);
         }
 
         [Server]
-        public void SetHP(int _value)
+        public void ModifyHP(int _value)
         {
             if (currentHp <= 0) return;
             currentHp = Mathf.Clamp(currentHp + _value, 0, originalAtributes.hp);
